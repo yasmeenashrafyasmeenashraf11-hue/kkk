@@ -22,7 +22,7 @@ if "gemini_model" not in st.session_state:
     page_icon="👨‍👩‍👧‍👦",
     layout="wide",
     initial_sidebar_state="expanded"
-)
+
 
 # إضافة CSS لـ RTL والألوان
 st.markdown("""
