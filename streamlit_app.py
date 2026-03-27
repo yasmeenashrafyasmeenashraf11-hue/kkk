@@ -6,7 +6,7 @@ if "gemini_model" not in st.session_state:
     google_api_key = st.text_input("Google AI API Key", type="password")
     if google_api_key:
         genai.configure(api_key=google_api_key)
-        st.session_state.gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+        st.session_state.gemini_model = genai.GenerativeModel('gemini-pro')
         st.session_state.chat = st.session_state.gemini_model.start_chat(history=[])
     else:
         st.info("الرجاء إضافة مفتاح Google AI API للمتابعة.", icon="🗝️")
