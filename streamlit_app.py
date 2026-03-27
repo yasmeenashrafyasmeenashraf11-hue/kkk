@@ -132,9 +132,9 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 import streamlit as st
-import openai
+import google.generativeai as genai
 
-st.title("My OpenAI App")
+st.title("My  App")
 
 
 # تهيئة session state
