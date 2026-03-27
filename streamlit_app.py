@@ -144,7 +144,6 @@ import openai
 
 st.title("My OpenAI App")
 
-client = OpenAI(api_key=API_KEY)
 
 # تهيئة session state
 if "teen_data" not in st.session_state:
