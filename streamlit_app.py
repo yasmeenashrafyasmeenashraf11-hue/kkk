@@ -1,14 +1,47 @@
 import streamlit as st
 import google.generativeai as genai
 
-# تهيئة API
-genai.configure(api_key=st.secrets["google_ai"]["api_key"])
+# Show title and description
+st.title("💬 Chatbot")
+st.write(
+    "This is a simple chatbot that uses Google's Gemini model to generate responses. "
+    "To use this app, you need to provide a Google AI API key, which you can get from "
+    "[Google AI Studio](https://makersuite.google.com/app/apikey)."
+)
 
-# مثال على استخدام Gemini
-model = genai.GenerativeModel('gemini-pro')
-response = model.generate_content("Hello!")
-st.write(response.text)
-st.set_page_config(
+# Ask user for their Google AI API key
+google_api_key = st.text_input("Google AI API Key", type="password")
+if not google_api_key:
+    st.info("Please add your Google AI API key to continue.", icon="🗝️")
+else:
+    # Configure Google Gemini
+    genai.configure(api_key=google_api_key)
+    model = genai.GenerativeModel('gemini-pro')
+
+    # Initialize chat history
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    # Display chat messages
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    # Chat input
+    if prompt := st.chat_input("What is up?"):
+        # Add user message to chat history
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        # Generate response using Gemini
+        with st.chat_message("assistant"):
+            response = model.generate_content(prompt)
+            st.markdown(response.text)
+
+        # Add assistant response to chat history
+        st.session_state.messages.append({"role": "assistant", "content": response.text})
+
     page_title="مرشد المراهقة الآمنة",
     page_icon="👨‍👩‍👧‍👦",
     layout="wide",
