@@ -139,11 +139,10 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# تهيئة OpenAI client
-API_KEY = os.getenv("api here")
-if not API_KEY:
-    st.error("❌ خطأ: لم يتم العثور على OPENAI_API_KEY في ملف .env")
-    st.stop()
+import streamlit as st
+import openai
+
+st.title("My OpenAI App")
 
 client = OpenAI(api_key=API_KEY)
 
