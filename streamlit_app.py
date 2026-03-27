@@ -15,36 +15,9 @@ if "gemini_model" not in st.session_state:
         st.info("الرجاء إضافة مفتاح Google AI API للمتابعة.", icon="🗝️")
         st.stop()
 
-# تهيئة سجل المحادثة
-if "messages" not in st.session_state:
-    st.session_state.messages = []
-
-# عرض رسائل المحادثة
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-# إدخال المحادثة
-if prompt := st.chat_input("اكتب رسالتك هنا..."):
-    # إضافة رسالة المستخدم إلى سجل المحادثة
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
-
-    try:
-        # إنشاء رد باستخدام Gemini
-        with st.chat_message("assistant"):
-            # استخدام chat.send_message بدلاً من generate_content
-            response = st.session_state.chat.send_message(prompt)
-            st.markdown(response.text)
-
-        # إضافة رد المساعد إلى سجل المحادثة
-        st.session_state.messages.append({"role": "assistant", "content": response.text})
-    except Exception as e:
-        st.error(f"حدث خطأ في إنشاء الرد: {str(e)}")
 
 
-st.set_page_config(
+
     page_title="مرشد المراهقة الآمنة",
     page_icon="👨‍👩‍👧‍👦",
     layout="wide",
