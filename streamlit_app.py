@@ -9,38 +9,42 @@ st.write(
     "[Google AI Studio](https://makersuite.google.com/app/apikey)."
 )
 
-# Ask user for their Google AI API key
-google_api_key = st.text_input("Google AI API Key", type="password")
-if not google_api_key:
-    st.info("Please add your Google AI API key to continue.", icon="🗝️")
-else:
-    # Configure Google Gemini
-    genai.configure(api_key=google_api_key)
-    model = genai.GenerativeModel('gemini-pro')
+# Configure Gemini API
+if "gemini_model" not in st.session_state:
+    google_api_key = st.text_input("Google AI API Key", type="password")
+    if google_api_key:
+        genai.configure(api_key=google_api_key)
+        st.session_state.gemini_model = genai.GenerativeModel('gemini-pro')
+    else:
+        st.info("Please add your Google AI API key to continue.", icon="🗝️")
+        st.stop()
 
-    # Initialize chat history
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
+# Initialize chat history
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-    # Display chat messages
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+# Display chat messages
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
 
-    # Chat input
-    if prompt := st.chat_input("What is up?"):
-        # Add user message to chat history
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
+# Chat input
+if prompt := st.chat_input("What is up?"):
+    # Add user message to chat history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
+    try:
         # Generate response using Gemini
         with st.chat_message("assistant"):
-            response = model.generate_content(prompt)
+            response = st.session_state.gemini_model.generate_content(prompt)
             st.markdown(response.text)
 
         # Add assistant response to chat history
         st.session_state.messages.append({"role": "assistant", "content": response.text})
+    except Exception as e:
+        st.error(f"Error generating response: {str(e)}")
 
     page_title="مرشد المراهقة الآمنة",
     page_icon="👨‍👩‍👧‍👦",
