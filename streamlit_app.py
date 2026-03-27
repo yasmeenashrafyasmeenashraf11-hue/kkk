@@ -1,12 +1,21 @@
 import streamlit as st
 import google.generativeai as genai
 
-
+# Page configuration
+st.set_page_config(
+    page_title="مرشد المراهقة الآمنة",
+    page_icon="👨‍👩‍👧‍👦",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # Show title and description
 st.title("💬 Chatbot")
-st.write("shit for yo all")
+st.write(
+    "This is a simple chatbot that uses Google's Gemini model to generate responses. "
+    "To use this app, you need to provide a Google AI API key, which you can get from "
+    "[Google AI Studio](https://makersuite.google.com/app/apikey)."
+)
 
 # Configure Gemini API
 if "gemini_model" not in st.session_state:
@@ -45,10 +54,12 @@ if prompt := st.chat_input("What is up?"):
     except Exception as e:
         st.error(f"Error generating response: {str(e)}")
 
+st.set_page_config(
     page_title="مرشد المراهقة الآمنة",
     page_icon="👨‍👩‍👧‍👦",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="expanded"
+)
 
 # إضافة CSS لـ RTL والألوان
 st.markdown("""
@@ -127,7 +138,19 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+import streamlit as st
+import openai
 
+st.title("My OpenAI App")
+
+
+# تهيئة session state
+if "teen_data" not in st.session_state:
+    st.session_state.teen_data = None
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
+if "show_form" not in st.session_state:
+    st.session_state.show_form = True
 
 # ================== الواجهة الجانبية (Sidebar) ==================
 with st.sidebar:
@@ -393,3 +416,4 @@ st.markdown("""
 ⚕️ في حالات الطوارئ، الرجاء التواصل مع متخصص نفسي مباشرة.
 </div>
 """, unsafe_allow_html=True)
+
