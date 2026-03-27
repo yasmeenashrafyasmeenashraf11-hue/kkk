@@ -1,2 +1,2 @@
-streamlit
-google-generativeai
+pip uninstall google-generativeai
+pip install google-generativeai==0.3.2
