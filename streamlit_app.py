@@ -136,19 +136,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-import streamlit as st
-import openai
 
-st.title("My OpenAI App")
-
-
-# تهيئة session state
-if "teen_data" not in st.session_state:
-    st.session_state.teen_data = None
-if "chat_history" not in st.session_state:
-    st.session_state.chat_history = []
-if "show_form" not in st.session_state:
-    st.session_state.show_form = True
 
 # ================== الواجهة الجانبية (Sidebar) ==================
 with st.sidebar:
