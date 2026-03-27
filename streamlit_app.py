@@ -1,51 +1,48 @@
 import streamlit as st
 import google.generativeai as genai
 
-
-# Show title and description
-st.title("💬 Chatbot")
-st.write(
-    "This is a simple chatbot that uses Google's Gemini model to generate responses. "
-    "To use this app, you need to provide a Google AI API key, which you can get from "
-    "[Google AI Studio](https://makersuite.google.com/app/apikey)."
-)
-
-# Configure Gemini API
+# تكوين Gemini API
 if "gemini_model" not in st.session_state:
     google_api_key = st.text_input("Google AI API Key", type="password")
     if google_api_key:
+        # تكوين genai مع مفتاح API
         genai.configure(api_key=google_api_key)
+        # إنشاء نموذج Gemini
         st.session_state.gemini_model = genai.GenerativeModel('gemini-pro')
+        # إنشاء محادثة جديدة
+        st.session_state.chat = st.session_state.gemini_model.start_chat()
     else:
-        st.info("Please add your Google AI API key to continue.", icon="🗝️")
+        st.info("الرجاء إضافة مفتاح Google AI API للمتابعة.", icon="🗝️")
         st.stop()
 
-# Initialize chat history
+# تهيئة سجل المحادثة
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat messages
+# عرض رسائل المحادثة
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Chat input
-if prompt := st.chat_input("What is up?"):
-    # Add user message to chat history
+# إدخال المحادثة
+if prompt := st.chat_input("اكتب رسالتك هنا..."):
+    # إضافة رسالة المستخدم إلى سجل المحادثة
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     try:
-        # Generate response using Gemini
+        # إنشاء رد باستخدام Gemini
         with st.chat_message("assistant"):
-            response = st.session_state.gemini_model.generate_content(prompt)
+            # استخدام chat.send_message بدلاً من generate_content
+            response = st.session_state.chat.send_message(prompt)
             st.markdown(response.text)
 
-        # Add assistant response to chat history
+        # إضافة رد المساعد إلى سجل المحادثة
         st.session_state.messages.append({"role": "assistant", "content": response.text})
     except Exception as e:
-        st.error(f"Error generating response: {str(e)}")
+        st.error(f"حدث خطأ في إنشاء الرد: {str(e)}")
+
 
 st.set_page_config(
     page_title="مرشد المراهقة الآمنة",
