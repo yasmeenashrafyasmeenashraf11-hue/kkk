@@ -45,8 +45,7 @@ else:
     page_title="مرشد المراهقة الآمنة",
     page_icon="👨‍👩‍👧‍👦",
     layout="wide",
-    initial_sidebar_state="expanded"
-)
+    initial_sidebar_state="expanded",
 
 # إضافة CSS لـ RTL والألوان
 st.markdown("""
