@@ -1,13 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Page configuration
-st.set_page_config(
-    page_title="مرشد المراهقة الآمنة",
-    page_icon="👨‍👩‍👧‍👦",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 # Show title and description
 st.title("💬 Chatbot")
