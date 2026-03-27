@@ -6,9 +6,7 @@ import google.generativeai as genai
 
 # Show title and description
 st.title("💬 Chatbot")
-st.write(
-  "shit for yo all"
-)
+st.write("shit for yo all")
 
 # Configure Gemini API
 if "gemini_model" not in st.session_state:
