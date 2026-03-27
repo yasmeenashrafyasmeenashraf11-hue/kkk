@@ -56,7 +56,7 @@ else:
         st.session_state.messages.append({"role": "assistant", "content": response})
 
 st.set_page_config(
-    page_title="مدرب التربية الوالدية الذكي",
+    page_title="مرشد المراهقة الآمنة",
     page_icon="👨‍👩‍👧‍👦",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -156,7 +156,7 @@ if "show_form" not in st.session_state:
 # ================== الواجهة الجانبية (Sidebar) ==================
 with st.sidebar:
     st.image("https://img.icons8.com/color/200/000000/parenting.png", width=100)
-    st.title("👨‍👩‍👧‍👦 مدرب التربية الوالدية الذكي")
+    st.title("👨‍👩‍👧‍👦 مرشد المراهقة الآمنة ")
     st.write("---")
     
     if st.session_state.show_form:
@@ -262,7 +262,7 @@ if st.session_state.show_form:
                 "stress_level": stress_level,
                 "previous_attempts": previous_attempts.strip() or "لم يتم تحديد محاولات سابقة",
                 "interests": interests.strip() or "لم يتم تحديد اهتمامات",
-                "created_at": datetime.now().isoformat()
+                
             }
             st.session_state.show_form = False
             st.session_state.chat_history = []
