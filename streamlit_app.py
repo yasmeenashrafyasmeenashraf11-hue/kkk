@@ -1,20 +1,13 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Page configuration
-st.set_page_config(
-    page_title="مرشد المراهقة الآمنة",
-    page_icon="👨‍👩‍👧‍👦",
-    layout="wide",
-    initial_sidebar_state="expanded"
+
 )
 
 # Show title and description
 st.title("💬 Chatbot")
 st.write(
-    "This is a simple chatbot that uses Google's Gemini model to generate responses. "
-    "To use this app, you need to provide a Google AI API key, which you can get from "
-    "[Google AI Studio](https://makersuite.google.com/app/apikey)."
+  "shit for yo all"
 )
 
 # Configure Gemini API
