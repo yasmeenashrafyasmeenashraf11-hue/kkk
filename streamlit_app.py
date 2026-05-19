@@ -167,7 +167,6 @@ with st.sidebar:
             with st.expander("📋 عرض البيانات", expanded=False):
                 st.write(f"**الاسم:** {st.session_state.teen_data['name']}")
                 st.write(f"**العمر:** {st.session_state.teen_data['age']} سنة")
-                  st.write(f"**الطاقة:** {st.session_state.teen_data['energy']} 'طاقة")
                 st.write(f"**الجنس:** {st.session_state.teen_data['gender']}")
                 st.write(f"**نوع الوالد:** {st.session_state.teen_data['parent_type']}")
                 st.write("---")
