@@ -2,7 +2,7 @@ import streamlit as st
 from openai import OpenAI
 
 # Show title and description.
-st.title(" ")
+st.title("💬 Chatbot")
 st.write(
     "This is a simple chatbot that uses OpenAI's GPT-3.5 model to generate responses. "
     "To use this app, you need to provide an OpenAI API key, which you can get [here](https://platform.openai.com/account/api-keys). "
@@ -191,20 +191,20 @@ if st.session_state.show_form:
     
     # ===== القسم 1: بيانات المراهق =====
     st.markdown('<div class="section-header">📌 القسم 1: بيانات المراهق</div>', unsafe_allow_html=True)
-    col1, col2, col3 = st.columns(2)
+    col1, col2 = st.columns(2)
     
     with col1:
         teen_name = st.text_input("🔹 اسم المراهق*", placeholder="أدخل الاسم الأول")
     
     with col2:
         teen_age = st.number_input("🔹 العمر*", min_value=8, max_value=25, value=15)
-
+    
     col1, col2 = st.columns(2)
     with col1:
         teen_gender = st.selectbox("🔹 الجنس*", ["ذكر", "أنثى"])
     
     with col2:
-        parent_type = st.selectbox("🔹 [الطاقة *", ["1", "2", "3","4",",)
+        parent_type = st.selectbox("🔹 نوع الوالد*", ["الأب", "الأم", "وصي"])
     
     # ===== القسم 2: تفاصيل المشكلة =====
     st.markdown('<div class="section-header">📌 القسم 2: تفاصيل المشكلة</div>', unsafe_allow_html=True)
