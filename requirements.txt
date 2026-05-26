@@ -1,2 +1,2 @@
 streamlit
-google-api-client
+google-genai
